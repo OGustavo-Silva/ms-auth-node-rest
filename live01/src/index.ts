@@ -1,5 +1,6 @@
 
-import express, {Request, Response, NextFunction} from 'express';
+import express from 'express';
+import statusRoute from './routes/status.route';
 import usersRouter from './routes/users.route';
 
 const app = express();
@@ -9,11 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Routes Settings
+app.use(statusRoute);
 app.use(usersRouter);
-
-app.get('/status', (req: Request, res: Response, next: NextFunction) => {
-    res.status(200).send({foo: 'bar'});
-});
 
 //Start Server
 app.listen(3000, () => {
